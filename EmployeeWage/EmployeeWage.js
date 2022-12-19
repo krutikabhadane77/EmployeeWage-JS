@@ -152,3 +152,33 @@ console.log("Full working days: "+fullWorkingDays);
 console.log("Part working days: "+partWorkingDays);
 console.log("Non working days: "+nonWorkingDays);
 
+//UC 11
+let totalEmpWages = empDailyHrsAndWageArr
+                            .filter(obj => obj.dailyWage >0)
+                            .reduce((totalWage,obj)=>
+                                totalWage=totalWage+obj.dailyWage,0);
+
+
+let totalEmpHours = empDailyHrsAndWageArr
+                            .filter(obj => obj.dailyHours >0)
+                            .reduce((totalHours,obj)=>
+                                totalHours=totalHours+obj.dailyHours,0);
+console.log("Total hours: "+totalEmpHours);
+console.log("Total wage: "+totalEmpWages);
+
+process.stdout.write("Logging Full Work Days:\n");
+empDailyHrsAndWageArr
+        .filter(obj=>obj.dailyHours == 8)
+        .forEach(obj=>process.stdout.write(obj.toString()));
+
+let partWorkingDayStrArr = empDailyHrsAndWageArr
+                                    .filter(obj=>obj.dailyHours==4)
+                                    .map(obj=>obj.toString());
+process.stdout.write("Logging Part Working Days:\n");
+console.log(partWorkingDayStrArr);
+
+let nonWorkingDayStrArr = empDailyHrsAndWageArr
+                                    .filter(obj=>obj.dailyHours==0)
+                                    .map(obj=>obj.dayNum);
+process.stdout.write("Logging Non Working Days:\n");
+console.log(nonWorkingDayStrArr);
